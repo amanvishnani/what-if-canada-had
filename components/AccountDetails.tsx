@@ -6,7 +6,7 @@ import {
     Clock
 } from 'lucide-react';
 import { AccountHero } from './AccountHero';
-import { TransactionItem } from './TransactionItem';
+import { TransactionList } from './TransactionList';
 import { LandmarkIcon } from './LandmarkIcon';
 
 interface AccountDetailsProps {
@@ -58,38 +58,11 @@ export const AccountDetails: React.FC<AccountDetailsProps> = ({ accounts, transa
             <AccountHero account={account} />
 
             {/* Transaction Feed Section */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800 overflow-hidden transition-colors">
-                <div className="p-6 border-b border-gray-100 dark:border-slate-800 flex justify-between items-center">
-                    <h2 className="text-xl font-bold text-canDark dark:text-white tracking-tight">Recent Activity</h2>
-                    <div className="flex items-center gap-2">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                        </span>
-                        <span className="text-[10px] font-black text-green-600 uppercase tracking-tighter">Real-time Feed</span>
-                    </div>
-                </div>
-
-                <div className="divide-y divide-gray-50 dark:divide-slate-800">
-                    {accountTransactions.length > 0 ? (
-                        accountTransactions.map((t) => (
-                            <TransactionItem key={t.id} transaction={t} />
-                        ))
-                    ) : (
-                        <div className="p-20 text-center">
-                            <p className="text-gray-400 font-medium">No recent transactions for this account.</p>
-                        </div>
-                    )}
-                </div>
-
-                {accountTransactions.length > 0 && (
-                    <div className="p-4 bg-gray-50 dark:bg-slate-800/20 text-center border-t border-gray-50 dark:border-slate-800">
-                        <button className="text-xs font-bold text-gray-400 hover:text-canRed transition-colors uppercase tracking-widest">
-                            Load More Transactions
-                        </button>
-                    </div>
-                )}
-            </div>
+            <TransactionList
+                transactions={accountTransactions}
+                accounts={accounts}
+                title={`${account.bankName} Activity`}
+            />
         </div>
     );
 };

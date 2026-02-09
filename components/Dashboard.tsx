@@ -4,6 +4,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { ArrowUpRight, DollarSign, Wallet, ShieldCheck, TrendingUp } from 'lucide-react';
 import { BankLogo } from './BankLogo';
 import { useNavigate } from 'react-router-dom';
+import { TransactionList } from './TransactionList';
 
 interface DashboardProps {
   accounts: Account[];
@@ -115,27 +116,23 @@ export const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, da
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Recent Transactions */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-lg shadow-sm border border-gray-200 dark:border-slate-800 transition-colors">
-          <div className="p-6 border-b border-gray-100 dark:border-slate-800 flex justify-between items-center">
+        <div className="lg:col-span-2 space-y-4">
+          <div className="flex justify-between items-center px-2">
             <h3 className="font-bold text-lg text-canDark dark:text-white">Unified Transaction Stream</h3>
-            <button className="text-sm text-canRed font-bold hover:underline" onClick={() => navigate('/open-banking/accounts')}>View All Activity</button>
+            <button
+              className="text-sm text-canRed font-bold hover:underline bg-red-50 dark:bg-red-900/10 px-3 py-1 rounded-full transition-colors"
+              onClick={() => navigate('/open-banking/transactions')}
+            >
+              View All Activity
+            </button>
           </div>
-          <div className="divide-y divide-gray-100 dark:divide-slate-800">
-            {transactions.map((t) => (
-              <div key={t.id} className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 flex items-center justify-center text-canDark dark:text-gray-400">
-                    <DollarSign size={18} />
-                  </div>
-                  <div>
-                    <p className="font-bold text-sm text-gray-800 dark:text-gray-200">{t.merchant}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{t.date} • {t.category}</p>
-                  </div>
-                </div>
-                <span className="font-bold text-gray-900 dark:text-white">-${t.amount.toFixed(2)}</span>
-              </div>
-            ))}
-          </div>
+          <TransactionList
+            transactions={transactions}
+            accounts={accounts}
+            limit={5}
+            showLoadMore={false}
+            title="Recent Activity"
+          />
         </div>
 
         {/* Spending Breakdown */}

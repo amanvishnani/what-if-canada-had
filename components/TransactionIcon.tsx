@@ -5,7 +5,9 @@ import {
     Repeat,
     ShoppingCart,
     Wallet,
-    ExternalLink
+    ExternalLink,
+    Plus,
+    Minus
 } from 'lucide-react';
 import { TransactionType } from '../types';
 
@@ -17,14 +19,14 @@ export const TransactionIcon: React.FC<TransactionIconProps> = ({ type }) => {
     switch (type) {
         case 'BUY':
             return (
-                <div className="bg-red-50 dark:bg-red-900/20 p-2 rounded-full text-red-600">
-                    <ArrowUpRight size={18} />
+                <div className="bg-green-50 dark:bg-green-900/20 p-2 rounded-full text-green-600">
+                    <Plus size={18} />
                 </div>
             );
         case 'SELL':
             return (
-                <div className="bg-green-50 dark:bg-green-900/20 p-2 rounded-full text-green-600">
-                    <ArrowDownLeft size={18} />
+                <div className="bg-red-50 dark:bg-red-900/20 p-2 rounded-full text-red-600">
+                    <Minus size={18} />
                 </div>
             );
         case 'Contribution':

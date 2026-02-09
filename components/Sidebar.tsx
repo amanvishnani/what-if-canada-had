@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Store, MessageSquare, Shield, LogOut, Moon, Sun, Home, Landmark } from 'lucide-react';
+import { LayoutDashboard, Store, MessageSquare, Shield, LogOut, Moon, Sun, Home, Landmark, Repeat } from 'lucide-react';
 
 interface SidebarProps {
   darkMode: boolean;
@@ -14,6 +14,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ darkMode, toggleDarkMode, onBa
   const navItems = [
     { id: 'dashboard', path: '/open-banking/dashboard', label: 'Overview', icon: LayoutDashboard },
     { id: 'accounts', path: '/open-banking/accounts', label: 'Accounts', icon: Landmark },
+    { id: 'transactions', path: '/open-banking/transactions', label: 'Activity', icon: Repeat },
     { id: 'marketplace', path: '/open-banking/marketplace', label: 'Marketplace', icon: Store },
     { id: 'assistant', path: '/open-banking/assistant', label: 'Assistant', icon: MessageSquare },
     { id: 'consent', path: '/open-banking/consent', label: 'My Consents', icon: Shield },
