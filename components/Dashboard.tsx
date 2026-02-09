@@ -64,7 +64,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, da
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {accounts.map((account) => {
-            const isCredit = account.accountType === 'Credit';
+            const isCredit = account.category === 'Credit';
             const usagePercent = isCredit && account.limit ? (account.used! / account.limit) * 100 : 0;
 
             return (

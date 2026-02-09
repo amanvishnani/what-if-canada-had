@@ -15,8 +15,15 @@ export const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
         switch (type) {
             case 'Chequing': return <Landmark className="text-blue-500" size={24} />;
             case 'Savings': return <PiggyBank className="text-green-500" size={24} />;
-            case 'Credit': return <CreditCard className="text-red-500" size={24} />;
-            case 'Investment': return <Briefcase className="text-yellow-500" size={24} />;
+            case 'Credit Card': return <CreditCard className="text-red-500" size={24} />;
+            case 'Line of Credit': return <CreditCard className="text-orange-500" size={24} />;
+            case 'Mortgage': return <Landmark className="text-purple-500" size={24} />;
+            case 'TFSA':
+            case 'RRSP':
+            case 'RESP':
+            case 'FHSA':
+            case 'Non-Registered':
+                return <Briefcase className="text-yellow-500" size={24} />;
             default: return <Landmark size={24} />;
         }
     };
@@ -35,7 +42,7 @@ export const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
 
             <div className="grid grid-cols-1 gap-4">
                 {accounts.map((account) => {
-                    const isCredit = account.accountType === 'Credit';
+                    const isCredit = account.category === 'Credit';
                     const usagePercent = isCredit && account.limit ? (account.used! / account.limit) * 100 : 0;
 
                     return (

@@ -27,10 +27,25 @@ export interface Holding {
   changePercent: number;
 }
 
+export type AccountCategory = 'Banking' | 'Investment' | 'Credit';
+
+export type AccountType =
+  | 'Chequing'
+  | 'Savings'
+  | 'TFSA'
+  | 'RRSP'
+  | 'RESP'
+  | 'FHSA'
+  | 'Non-Registered'
+  | 'Credit Card'
+  | 'Line of Credit'
+  | 'Mortgage';
+
 export interface Account {
   id: string;
   bankName: string;
-  accountType: 'Chequing' | 'Savings' | 'Credit' | 'Investment';
+  category: AccountCategory;
+  accountType: AccountType;
   balance: number;
   lastUpdated: string;
   accountNumber: string; // masked

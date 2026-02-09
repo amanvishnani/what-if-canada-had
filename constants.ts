@@ -57,6 +57,7 @@ export const MOCK_ACCOUNTS: Account[] = [
   {
     id: 'acc_1',
     bankName: 'Royal Bank',
+    category: 'Banking',
     accountType: 'Chequing',
     balance: 2450.50,
     lastUpdated: 'Just now',
@@ -66,6 +67,7 @@ export const MOCK_ACCOUNTS: Account[] = [
   {
     id: 'acc_2',
     bankName: 'TD Bank',
+    category: 'Banking',
     accountType: 'Savings',
     balance: 15000.00,
     lastUpdated: '5 mins ago',
@@ -75,7 +77,8 @@ export const MOCK_ACCOUNTS: Account[] = [
   {
     id: 'acc_3',
     bankName: 'Scotiabank',
-    accountType: 'Credit',
+    category: 'Credit',
+    accountType: 'Credit Card',
     balance: -450.25,
     lastUpdated: '1 hour ago',
     accountNumber: '**** 9012',
@@ -86,7 +89,8 @@ export const MOCK_ACCOUNTS: Account[] = [
   {
     id: 'acc_4',
     bankName: 'WealthSimple',
-    accountType: 'Investment',
+    category: 'Investment',
+    accountType: 'TFSA',
     balance: 34500.75,
     lastUpdated: '1 day ago',
     accountNumber: '**** 3456',

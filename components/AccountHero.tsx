@@ -8,7 +8,7 @@ interface AccountHeroProps {
 }
 
 export const AccountHero: React.FC<AccountHeroProps> = ({ account }) => {
-    const isCredit = account.accountType === 'Credit';
+    const isCredit = account.category === 'Credit';
     const usagePercent = isCredit && account.limit ? (account.used! / account.limit) * 100 : 0;
     const isOverdue = account.balance < 0;
 

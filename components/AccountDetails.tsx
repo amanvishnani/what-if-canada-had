@@ -62,7 +62,7 @@ export const AccountDetails: React.FC<AccountDetailsProps> = ({ accounts, transa
 
             {/* Transaction Feed Section */}
             {/* Conditional Tabs for Investment Accounts */}
-            {account.accountType === 'Investment' ? (
+            {account.category === 'Investment' ? (
                 <>
                     <div className="flex gap-4 mb-6 border-b border-gray-100 dark:border-slate-800">
                         <button
