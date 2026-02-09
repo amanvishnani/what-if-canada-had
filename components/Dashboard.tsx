@@ -3,6 +3,7 @@ import { Account, Transaction } from '../types';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { ArrowUpRight, DollarSign, Wallet, ShieldCheck, TrendingUp } from 'lucide-react';
 import { BankLogo } from './BankLogo';
+import { useNavigate } from 'react-router-dom';
 
 interface DashboardProps {
   accounts: Account[];
@@ -13,7 +14,7 @@ interface DashboardProps {
 const COLORS = ['#EA0000', '#26374A', '#FFBB28', '#8884d8', '#00C49F'];
 
 export const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, darkMode }) => {
-
+  const navigate = useNavigate();
   const totalBalance = accounts.reduce((acc, curr) => acc + curr.balance, 0);
 
   // Aggregate categories
@@ -49,7 +50,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, da
           </div>
         </div>
         <div className="absolute -right-10 -bottom-20 opacity-10 text-white">
-          {/* Large Maple Leaf Background */}
           <svg width="300" height="300" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.0002 22.6275L11.9961 17.6569C11.9961 17.6569 9.38914 18.5367 8.92723 18.0069C8.46532 17.4771 10.1587 14.2253 10.1587 14.2253C10.1587 14.2253 6.94632 16.5912 5.86877 15.3552C4.79122 14.1192 8.35649 10.9575 8.35649 10.9575C8.35649 10.9575 3.39169 11.5312 3.12225 9.94191C2.85282 8.35265 6.43825 8.65287 7.7314 7.63756C9.02454 6.62225 6.66914 4.54751 7.66981 3.23816C8.67048 1.9288 10.8707 5.70471 12.0002 5.70471C13.1297 5.70471 15.33 1.9288 16.3307 3.23816C17.3313 4.54751 14.9759 6.62225 16.2691 7.63756C17.5622 8.65287 21.1477 8.35265 20.8782 9.94191C20.6088 11.5312 15.644 10.9575 15.644 10.9575C15.644 10.9575 19.2093 14.1192 18.1317 15.3552C17.0542 16.5912 13.8418 14.2253 13.8418 14.2253C13.8418 14.2253 15.5352 17.4771 15.0733 18.0069C14.6113 18.5367 12.0044 17.6569 12.0044 17.6569L12.0002 22.6275Z" />
           </svg>
@@ -62,26 +62,52 @@ export const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, da
           Connected Institutions
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {accounts.map((account) => (
-            <div key={account.id} className="bg-white dark:bg-slate-900 p-5 rounded-lg shadow-sm border border-gray-200 dark:border-slate-800 hover:shadow-md hover:border-canRed dark:hover:border-canRed transition-all">
-              <div className="flex justify-between items-start mb-4">
-                <BankLogo bankName={account.bankName} className="w-12 h-12" />
-                <span className="text-xs text-gray-400 dark:text-gray-500 font-mono bg-gray-50 dark:bg-slate-800/50 px-2 py-1 rounded">{account.accountNumber}</span>
+          {accounts.map((account) => {
+            const isCredit = account.accountType === 'Credit';
+            const usagePercent = isCredit && account.limit ? (account.used! / account.limit) * 100 : 0;
+
+            return (
+              <div
+                key={account.id}
+                onClick={() => navigate(`/open-banking/accounts/${account.id}`)}
+                className="bg-white dark:bg-slate-900 p-5 rounded-lg shadow-sm border border-gray-200 dark:border-slate-800 hover:shadow-md hover:border-canRed dark:hover:border-canRed transition-all cursor-pointer group"
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <BankLogo bankName={account.bankName} className="w-12 h-12" />
+                  <span className="text-xs text-gray-400 dark:text-gray-500 font-mono bg-gray-50 dark:bg-slate-800/50 px-2 py-1 rounded group-hover:text-canRed transition-colors">{account.accountNumber}</span>
+                </div>
+                <div className="mb-2">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold">{account.accountType}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+                    ${Math.abs(account.balance).toLocaleString('en-CA', { minimumFractionDigits: 2 })}
+                  </h3>
+                </div>
+
+                {/* Credit Limit Progress Bar */}
+                {isCredit && account.limit && (
+                  <div className="mt-3 mb-4">
+                    <div className="flex justify-between text-[10px] font-bold uppercase tracking-tighter mb-1">
+                      <span className="text-gray-400">Usage</span>
+                      <span className="text-canRed">{usagePercent.toFixed(0)}%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-canRed transition-all duration-500"
+                        style={{ width: `${Math.min(usagePercent, 100)}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex justify-between items-center pt-2 border-t border-gray-50 dark:border-slate-800">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{account.bankName}</p>
+                  <p className={`text-xs ${account.balance < 0 ? 'text-canRed' : 'text-green-600'} flex items-center font-bold`}>
+                    {account.balance < 0 ? 'Due' : 'Available'}
+                  </p>
+                </div>
               </div>
-              <div className="mb-2">
-                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold">{account.accountType}</p>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
-                  ${Math.abs(account.balance).toLocaleString('en-CA', { minimumFractionDigits: 2 })}
-                </h3>
-              </div>
-              <div className="flex justify-between items-center pt-2 border-t border-gray-50 dark:border-slate-800">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{account.bankName}</p>
-                <p className={`text-xs ${account.balance < 0 ? 'text-canRed' : 'text-green-600'} flex items-center font-bold`}>
-                  {account.balance < 0 ? 'Due' : 'Available'}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
@@ -92,7 +118,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ accounts, transactions, da
         <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-lg shadow-sm border border-gray-200 dark:border-slate-800 transition-colors">
           <div className="p-6 border-b border-gray-100 dark:border-slate-800 flex justify-between items-center">
             <h3 className="font-bold text-lg text-canDark dark:text-white">Unified Transaction Stream</h3>
-            <button className="text-sm text-canRed font-bold hover:underline">View All Activity</button>
+            <button className="text-sm text-canRed font-bold hover:underline" onClick={() => navigate('/open-banking/accounts')}>View All Activity</button>
           </div>
           <div className="divide-y divide-gray-100 dark:divide-slate-800">
             {transactions.map((t) => (

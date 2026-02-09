@@ -11,7 +11,7 @@ export const BankLogo: React.FC<BankLogoProps> = ({ bankName, className = "w-10 
   // Royal Bank (RBC)
   if (name.includes('royal') || name.includes('rbc')) {
     return (
-      <img src="/logos/rbc.png" style={{ width: '30%', height: '30%' }} alt="RBC Logo" className={`${className} object-contain`} />
+      <img src="/logos/rbc.png" alt="RBC Logo" className={`${className} object-contain`} />
     );
   }
 

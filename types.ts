@@ -1,10 +1,19 @@
+export type TransactionType = 'Credit' | 'Debit' | 'Contribution' | 'BUY' | 'SELL' | 'Payment' | 'Borrow';
+
 export interface Transaction {
   id: string;
+  uuid: string;
   date: string;
+  datetime: string;
   merchant: string;
+  description?: string;
   amount: number;
   category: string;
   accountRef: string;
+  type: TransactionType;
+  pending?: boolean;
+  exchange?: string;
+  address?: string;
 }
 
 export interface Account {
@@ -15,6 +24,8 @@ export interface Account {
   lastUpdated: string;
   accountNumber: string; // masked
   color: string;
+  limit?: number;
+  used?: number;
 }
 
 export interface SpendingCategory {

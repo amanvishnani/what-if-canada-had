@@ -5,6 +5,8 @@ import { Dashboard } from './Dashboard';
 import { Marketplace } from './Marketplace';
 import { Assistant } from './Assistant';
 import { Layout } from './Layout';
+import { Accounts } from './Accounts';
+import { AccountDetails } from './AccountDetails';
 import { MOCK_ACCOUNTS, MOCK_TRANSACTIONS } from '../constants';
 import { Shield } from 'lucide-react';
 
@@ -23,6 +25,7 @@ export const OpenBankingApp: React.FC<OpenBankingAppProps> = ({ darkMode, setDar
         if (path.includes('marketplace')) return 'Smart Marketplace';
         if (path.includes('assistant')) return 'Maple AI Assistant';
         if (path.includes('consent')) return 'Consent Management';
+        if (path.includes('accounts')) return 'Manage Accounts';
         return 'Financial Overview';
     };
 
@@ -47,6 +50,7 @@ export const OpenBankingApp: React.FC<OpenBankingAppProps> = ({ darkMode, setDar
                         </div>
                         <div className="p-4 space-y-2">
                             <button onClick={() => { navigate('/open-banking/dashboard'); setIsSidebarOpen(false); }} className="block w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Overview</button>
+                            <button onClick={() => { navigate('/open-banking/accounts'); setIsSidebarOpen(false); }} className="block w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Accounts</button>
                             <button onClick={() => { navigate('/open-banking/marketplace'); setIsSidebarOpen(false); }} className="block w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Marketplace</button>
                             <button onClick={() => { navigate('/open-banking/assistant'); setIsSidebarOpen(false); }} className="block w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Assistant</button>
                             <button onClick={() => { navigate('/open-banking/consent'); setIsSidebarOpen(false); }} className="block w-full text-left py-3 px-4 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition-colors">Consents</button>
@@ -67,6 +71,8 @@ export const OpenBankingApp: React.FC<OpenBankingAppProps> = ({ darkMode, setDar
                         path="dashboard"
                         element={<Dashboard accounts={MOCK_ACCOUNTS} transactions={MOCK_TRANSACTIONS} darkMode={darkMode} />}
                     />
+                    <Route path="accounts" element={<Accounts accounts={MOCK_ACCOUNTS} />} />
+                    <Route path="accounts/:accountId" element={<AccountDetails accounts={MOCK_ACCOUNTS} transactions={MOCK_TRANSACTIONS} />} />
                     <Route path="marketplace" element={<Marketplace darkMode={darkMode} />} />
                     <Route
                         path="assistant"

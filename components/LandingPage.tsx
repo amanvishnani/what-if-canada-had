@@ -39,36 +39,36 @@ export const LandingPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-[#F9FAFB] dark:bg-slate-950 flex flex-col font-sans transition-colors duration-300">
             {/* Header */}
-            <header className="p-8 flex justify-between items-center">
-                <div className="flex items-center gap-4">
-                    <img src="/GOC-GDC.png" alt="Canada" className="h-8 w-auto dark:invert" />
-                    <div className="h-6 w-px bg-gray-200 dark:border-slate-800"></div>
-                    <span className="text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest">Future Policy Labs</span>
+            <header className="p-4 md:p-8 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 border-b border-gray-100 dark:border-slate-900 md:border-none">
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                    <img src="/GOC-GDC.png" alt="Canada" className="h-5 md:h-8 w-auto dark:invert transition-all" />
+                    <div className="hidden md:block h-6 w-px bg-gray-200 dark:bg-slate-800"></div>
+                    <span className="text-[10px] md:text-sm font-bold text-gray-600 dark:text-gray-400 uppercase tracking-widest whitespace-nowrap">Future Policy Labs</span>
                 </div>
-                <div className="flex items-center gap-2">
-                    <ShieldCheck size={18} className="text-canRed" />
-                    <span className="text-xs font-bold text-canDark dark:text-white uppercase tracking-tighter">Verified Sandbox</span>
+                <div className="flex items-center gap-2 bg-white dark:bg-slate-900 px-4 py-2 md:p-0 rounded-full md:rounded-none border md:border-none border-gray-100 dark:border-slate-800 shadow-sm md:shadow-none">
+                    <ShieldCheck size={16} className="text-canRed md:w-5 md:h-5" />
+                    <span className="text-[10px] md:text-xs font-bold text-canDark dark:text-white uppercase tracking-tighter">Verified Sandbox</span>
                 </div>
             </header>
 
             {/* Hero Section */}
-            <main className="flex-1 max-w-6xl mx-auto px-8 py-16 flex flex-col justify-center">
-                <div className="max-w-3xl mb-16">
-                    <div className="inline-flex items-center gap-2 bg-canRed/10 text-canRed px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest mb-6">
+            <main className="flex-1 max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16 flex flex-col justify-center">
+                <div className="max-w-3xl mb-12 md:mb-16">
+                    <div className="inline-flex items-center gap-2 bg-canRed/10 text-canRed px-4 py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest mb-4 md:mb-6">
                         <Zap size={14} className="fill-current" />
                         The "What If" Series
                     </div>
-                    <h1 className="text-6xl md:text-7xl font-black text-canDark dark:text-white mb-8 tracking-tighter leading-tight">
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-canDark dark:text-white mb-6 md:mb-8 tracking-tighter leading-[1.1]">
                         What if Canada had <span className="text-canRed">actually</span> modernized?
                     </h1>
-                    <p className="text-xl text-gray-500 dark:text-gray-400 leading-relaxed font-medium">
+                    <p className="text-base md:text-xl text-gray-500 dark:text-gray-400 leading-relaxed font-medium">
                         Explore interactive prototypes of critical digital infrastructure that other nations take for granted.
                         MapleSync visualizes a friction-less Canadian economy.
                     </p>
                 </div>
 
                 {/* Portals Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                     <PortalCard
                         title="Open Banking"
                         description="Secure financial data sharing that puts you in control. Aggregate your accounts, analyze spending, and switch providers instantly."
@@ -88,18 +88,18 @@ export const LandingPage: React.FC = () => {
                 </div>
 
                 {/* Footer/Meta */}
-                <div className="mt-20 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-gray-100 dark:border-slate-900 pt-12">
-                    <div className="flex items-center gap-8">
+                <div className="mt-16 md:mt-20 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-gray-100 dark:border-slate-900 pt-12">
+                    <div className="flex items-center gap-6 md:gap-8">
                         <div>
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Build Version</p>
-                            <p className="text-sm text-canDark dark:text-gray-400 font-mono">MAPLE-SYNCHRO-2026.04</p>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 md:mb-2">Build Version</p>
+                            <p className="text-xs md:text-sm text-canDark dark:text-gray-400 font-mono">MAPLE-SYNCHRO-2026.04</p>
                         </div>
                         <div>
-                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Security Status</p>
-                            <p className="text-sm text-green-600 font-bold">End-to-End Encrypted</p>
+                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 md:mb-2">Security Status</p>
+                            <p className="text-xs md:text-sm text-green-600 font-bold">End-to-End Encrypted</p>
                         </div>
                     </div>
-                    <p className="text-sm text-gray-400 max-w-xs text-center md:text-right font-medium">
+                    <p className="text-xs md:text-sm text-gray-400 max-w-xs text-center md:text-right font-medium">
                         Part of the "Future-Proof Canada" initiative. All data shown is mocked locally.
                     </p>
                 </div>
