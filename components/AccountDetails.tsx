@@ -7,7 +7,9 @@ import {
 } from 'lucide-react';
 import { AccountHero } from './AccountHero';
 import { TransactionList } from './TransactionList';
+import { HoldingsList } from './HoldingsList';
 import { LandmarkIcon } from './LandmarkIcon';
+import { MOCK_HOLDINGS } from '../constants';
 
 interface AccountDetailsProps {
     accounts: Account[];
@@ -17,6 +19,7 @@ interface AccountDetailsProps {
 export const AccountDetails: React.FC<AccountDetailsProps> = ({ accounts, transactions }) => {
     const { accountId } = useParams();
     const navigate = useNavigate();
+    const [activeTab, setActiveTab] = React.useState<'transactions' | 'holdings'>('holdings');
 
     const account = accounts.find(a => a.id === accountId);
     const accountTransactions = transactions.filter(t => t.accountRef === accountId);
@@ -50,7 +53,7 @@ export const AccountDetails: React.FC<AccountDetailsProps> = ({ accounts, transa
                 </button>
                 <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest bg-gray-50 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-gray-100 dark:border-slate-800">
                     <Clock size={12} className="text-canRed" />
-                    Last Synced: 1 Day Ago
+                    Last Synced: {account.lastUpdated}
                 </div>
             </div>
 
@@ -58,11 +61,47 @@ export const AccountDetails: React.FC<AccountDetailsProps> = ({ accounts, transa
             <AccountHero account={account} />
 
             {/* Transaction Feed Section */}
-            <TransactionList
-                transactions={accountTransactions}
-                accounts={accounts}
-                title={`${account.bankName} Activity`}
-            />
+            {/* Conditional Tabs for Investment Accounts */}
+            {account.accountType === 'Investment' ? (
+                <>
+                    <div className="flex gap-4 mb-6 border-b border-gray-100 dark:border-slate-800">
+                        <button
+                            onClick={() => setActiveTab('transactions')}
+                            className={`pb-3 text-sm font-bold uppercase tracking-wider transition-colors border-b-2 ${activeTab === 'transactions'
+                                ? 'border-canRed text-canRed'
+                                : 'border-transparent text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                                }`}
+                        >
+                            Transactions
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('holdings')}
+                            className={`pb-3 text-sm font-bold uppercase tracking-wider transition-colors border-b-2 ${activeTab === 'holdings'
+                                ? 'border-canRed text-canRed'
+                                : 'border-transparent text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                                }`}
+                        >
+                            Holdings
+                        </button>
+                    </div>
+
+                    {activeTab === 'holdings' ? (
+                        <HoldingsList holdings={MOCK_HOLDINGS} />
+                    ) : (
+                        <TransactionList
+                            transactions={accountTransactions}
+                            accounts={accounts}
+                            title={`${account.bankName} Activity`}
+                        />
+                    )}
+                </>
+            ) : (
+                <TransactionList
+                    transactions={accountTransactions}
+                    accounts={accounts}
+                    title={`${account.bankName} Activity`}
+                />
+            )}
         </div>
     );
 };

@@ -55,6 +55,18 @@ export const AccountHero: React.FC<AccountHeroProps> = ({ account }) => {
                         </p>
                     </div>
                 )}
+
+                {account.availableCash !== undefined && (
+                    <div className="w-full md:w-64 bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10">
+                        <p className="text-xs font-bold uppercase tracking-widest text-white/80 mb-2">Cash Available</p>
+                        <p className="text-3xl font-black mb-1">
+                            ${account.availableCash.toLocaleString('en-CA', { minimumFractionDigits: 2 })}
+                        </p>
+                        <p className="text-[10px] text-white/60 uppercase font-bold tracking-wider">
+                            Ready to trade
+                        </p>
+                    </div>
+                )}
             </div>
 
             {/* Subtle pattern background */}

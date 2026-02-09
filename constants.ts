@@ -1,4 +1,57 @@
-import { Account, Transaction } from './types';
+import { Account, Transaction, Holding } from './types';
+
+export const MOCK_HOLDINGS: Holding[] = [
+  {
+    id: 'h1',
+    symbol: 'AAPL',
+    name: 'Apple Inc.',
+    quantity: 15,
+    price: 175.50,
+    value: 2632.50,
+    change: 2.50,
+    changePercent: 1.45
+  },
+  {
+    id: 'h2',
+    symbol: 'VFV',
+    name: 'Vanguard S&P 500 Index ETF',
+    quantity: 50,
+    price: 110.25,
+    value: 5512.50,
+    change: -0.45,
+    changePercent: -0.41
+  },
+  {
+    id: 'h3',
+    symbol: 'SHOP',
+    name: 'Shopify Inc.',
+    quantity: 25,
+    price: 75.80,
+    value: 1895.00,
+    change: 5.20,
+    changePercent: 7.35
+  },
+  {
+    id: 'h4',
+    symbol: 'RY',
+    name: 'Royal Bank of Canada',
+    quantity: 100,
+    price: 124.50,
+    value: 12450.00,
+    change: 0.15,
+    changePercent: 0.12
+  },
+  {
+    id: 'h5',
+    symbol: 'TD',
+    name: 'Toronto-Dominion Bank',
+    quantity: 80,
+    price: 82.30,
+    value: 6584.00,
+    change: -1.20,
+    changePercent: -1.44
+  }
+];
 
 export const MOCK_ACCOUNTS: Account[] = [
   {
@@ -37,7 +90,8 @@ export const MOCK_ACCOUNTS: Account[] = [
     balance: 34500.75,
     lastUpdated: '1 day ago',
     accountNumber: '**** 3456',
-    color: 'bg-yellow-500'
+    color: 'bg-yellow-500',
+    availableCash: 5426.75
   }
 ];
 
@@ -63,7 +117,7 @@ export const MOCK_TRANSACTIONS: Transaction[] = [
     amount: 16.99,
     category: 'Subscription',
     accountRef: 'acc_3',
-    type: 'Borrow',
+    type: 'Debit',
     pending: false,
     address: '100 University Ave, Toronto, ON'
   },
@@ -76,7 +130,7 @@ export const MOCK_TRANSACTIONS: Transaction[] = [
     amount: 65.00,
     category: 'Transport',
     accountRef: 'acc_3',
-    type: 'Borrow',
+    type: 'Debit',
     pending: true,
     address: '123 Gas Station Rd, Ottawa, ON'
   },

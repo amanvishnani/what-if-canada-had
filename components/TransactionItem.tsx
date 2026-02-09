@@ -11,7 +11,7 @@ interface TransactionItemProps {
 }
 
 export const TransactionItem: React.FC<TransactionItemProps> = ({ transaction: t, bankName, accountNumber }) => {
-    const isPositive = t.type === 'SELL' || t.type === 'Credit' || t.type === 'Payment';
+    const isPositive = t.type === 'SELL' || t.type === 'Credit';
 
     return (
         <div className="p-4 hover:bg-gray-50 dark:hover:bg-slate-800/30 transition-all group">

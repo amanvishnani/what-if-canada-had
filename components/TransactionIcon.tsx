@@ -47,18 +47,7 @@ export const TransactionIcon: React.FC<TransactionIconProps> = ({ type }) => {
                     <ArrowDownLeft size={18} />
                 </div>
             );
-        case 'Borrow':
-            return (
-                <div className="bg-orange-50 dark:bg-orange-900/20 p-2 rounded-full text-orange-600">
-                    <ShoppingCart size={18} />
-                </div>
-            );
-        case 'Payment':
-            return (
-                <div className="bg-indigo-50 dark:bg-indigo-900/20 p-2 rounded-full text-indigo-600">
-                    <Repeat size={18} />
-                </div>
-            );
+
         default:
             return (
                 <div className="bg-gray-50 dark:bg-slate-800 p-2 rounded-full text-gray-600">

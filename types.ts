@@ -1,4 +1,4 @@
-export type TransactionType = 'Credit' | 'Debit' | 'Contribution' | 'BUY' | 'SELL' | 'Payment' | 'Borrow';
+export type TransactionType = 'Credit' | 'Debit' | 'Contribution' | 'BUY' | 'SELL';
 
 export interface Transaction {
   id: string;
@@ -16,6 +16,17 @@ export interface Transaction {
   address?: string;
 }
 
+export interface Holding {
+  id: string;
+  symbol: string;
+  name: string;
+  quantity: number;
+  price: number;
+  value: number;
+  change: number;
+  changePercent: number;
+}
+
 export interface Account {
   id: string;
   bankName: string;
@@ -26,6 +37,7 @@ export interface Account {
   color: string;
   limit?: number;
   used?: number;
+  availableCash?: number;
 }
 
 export interface SpendingCategory {
