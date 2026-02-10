@@ -96,6 +96,16 @@ export const MOCK_ACCOUNTS: Account[] = [
     accountNumber: '**** 3456',
     color: 'bg-yellow-500',
     availableCash: 5426.75
+  },
+  {
+    id: 'acc_5',
+    bankName: 'CIBC',
+    category: 'Credit',
+    accountType: 'Mortgage',
+    balance: -450000.00,
+    lastUpdated: '2 days ago',
+    accountNumber: '**** 7890',
+    color: 'bg-red-800'
   }
 ];
 
